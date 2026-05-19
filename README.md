@@ -1,18 +1,23 @@
-# 에이보급창고 클랜전 스타일 테스트
+# divine-clan-01
 
-## 로컬 실행
+모바일 최적화 FPS 클랜전 스타일 테스트입니다.
+
+## 실행
 ```bash
 npm install
 npm run dev
 ```
 
 ## 배포
-Vercel에서 프로젝트를 Import 하면 됩니다.
-- Framework Preset: Vite
-- Build Command: npm run build
-- Output Directory: dist
+GitHub에 업로드 후 Vercel에서 Vite 프리셋으로 Import 하면 됩니다.
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Install Command: 기본값
 
-## 수정 위치
-- 문항/결과/무기 목록: `src/main.jsx`
-- 디자인: `src/style.css`
-- 메인 배경 이미지: `public/hero-reference.png`
+## 캐릭터 이미지 규칙
+결과 이미지는 아래 경로 규칙으로 불러옵니다.
+`/result_characters/{resultId}_{gender}_{weapon}.webp`
+
+예: `/result_characters/P1_M2_female_AK47.webp`
+
+이미지가 없으면 자동으로 기본 플레이스홀더가 표시됩니다.
