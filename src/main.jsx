@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { RotateCcw, Share2, Target, Shield, MessageSquare, Trophy, Skull, CheckCircle2 } from 'lucide-react';
+import { RotateCcw, Share2, Target, MessageSquare, Trophy, Skull, CheckCircle2, Download } from 'lucide-react';
 import { questions, weapons, characters, playStyles, personalityStyles } from './data';
 import './styles.css';
 
@@ -37,7 +37,7 @@ function characterImageSrc(resultId, gender, weaponKey){
   return `/result_characters/${resultId}_${genderKey}_${weaponKey}.webp`;
 }
 
-function PlaceholderCharacter({ gender, weapon, typeName }){
+function PlaceholderCharacter(){
   return (
     <div className="placeholder-character">
       <div className="placeholder-glow" />
@@ -45,11 +45,6 @@ function PlaceholderCharacter({ gender, weapon, typeName }){
         <div className="head" />
         <div className="body" />
         <div className="weapon-line" />
-      </div>
-      <div className="placeholder-text">
-        <span>{gender}</span>
-        <strong>{weapon}</strong>
-        <small>{typeName}</small>
       </div>
     </div>
   );
@@ -110,6 +105,127 @@ function QuestionScreen({ user, answers, setAnswers, onFinish }){
   );
 }
 
+
+async function downloadProfileImage({ user, character, displayName, imageUrl, imageFailed }){
+  const size = 1024;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+
+  const bg = ctx.createLinearGradient(0, 0, size, size);
+  bg.addColorStop(0, '#070a14');
+  bg.addColorStop(0.55, '#15113a');
+  bg.addColorStop(1, '#050710');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, size, size);
+
+  const glow = ctx.createRadialGradient(size * 0.62, size * 0.36, 50, size * 0.62, size * 0.36, 520);
+  glow.addColorStop(0, 'rgba(124,58,237,0.55)');
+  glow.addColorStop(0.55, 'rgba(124,58,237,0.14)');
+  glow.addColorStop(1, 'rgba(124,58,237,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, size, size);
+
+  ctx.strokeStyle = 'rgba(214,183,106,0.85)';
+  ctx.lineWidth = 6;
+  roundRect(ctx, 34, 34, size - 68, size - 68, 44);
+  ctx.stroke();
+
+  ctx.strokeStyle = 'rgba(124,58,237,0.85)';
+  ctx.lineWidth = 4;
+  roundRect(ctx, 64, 64, size - 128, size - 128, 36);
+  ctx.stroke();
+
+  if(!imageFailed){
+    try{
+      const image = await loadImage(imageUrl);
+      const maxW = size * 0.76;
+      const maxH = size * 0.72;
+      const ratio = Math.min(maxW / image.width, maxH / image.height);
+      const w = image.width * ratio;
+      const h = image.height * ratio;
+      ctx.drawImage(image, (size - w) / 2, size * 0.12 + (maxH - h) / 2, w, h);
+    } catch {
+      drawProfileSilhouette(ctx, size);
+    }
+  } else {
+    drawProfileSilhouette(ctx, size);
+  }
+
+  const footerH = 156;
+  const footerY = size - footerH - 54;
+  const footerGrad = ctx.createLinearGradient(0, footerY, 0, footerY + footerH);
+  footerGrad.addColorStop(0, 'rgba(7,10,20,0.18)');
+  footerGrad.addColorStop(0.35, 'rgba(7,10,20,0.82)');
+  footerGrad.addColorStop(1, 'rgba(7,10,20,0.95)');
+  ctx.fillStyle = footerGrad;
+  ctx.fillRect(64, footerY, size - 128, footerH);
+
+  ctx.strokeStyle = 'rgba(214,183,106,0.8)';
+  ctx.lineWidth = 3;
+  roundRect(ctx, 112, footerY + 22, size - 224, 96, 28);
+  ctx.stroke();
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#f4d78b';
+  ctx.font = '800 34px sans-serif';
+  ctx.fillText('닉네임', size / 2, footerY + 57);
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '900 52px sans-serif';
+  ctx.fillText(user.nickname, size / 2, footerY + 106);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.72)';
+  ctx.font = '700 26px sans-serif';
+  ctx.fillText(`${displayName} · ${character.characterName}`, size / 2, size - 38);
+
+  const link = document.createElement('a');
+  const safeName = (user.nickname || 'profile').replace(/[\\/:*?"<>|\s]+/g, '_');
+  link.download = `${safeName}_profile.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function loadImage(src){
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+function roundRect(ctx, x, y, w, h, r){
+  const rr = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + rr, y);
+  ctx.arcTo(x + w, y, x + w, y + h, rr);
+  ctx.arcTo(x + w, y + h, x, y + h, rr);
+  ctx.arcTo(x, y + h, x, y, rr);
+  ctx.arcTo(x, y, x + w, y, rr);
+  ctx.closePath();
+}
+
+function drawProfileSilhouette(ctx, size){
+  ctx.save();
+  ctx.translate(size / 2, size * 0.47);
+  ctx.fillStyle = 'rgba(15,23,42,0.95)';
+  ctx.beginPath();
+  ctx.arc(0, -135, 86, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  roundRect(ctx, -150, -40, 300, 260, 52);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(148,163,184,0.95)';
+  ctx.lineWidth = 22;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(-220, 80);
+  ctx.lineTo(220, -80);
+  ctx.stroke();
+  ctx.restore();
+}
+
 function ResultScreen({ user, answers, onReset }){
   const result = useMemo(()=>calculateResult(answers), [answers]);
   const character = characters[result.resultId] || characters[`${result.playKey}_${result.personalityKey}`];
@@ -132,7 +248,7 @@ function ResultScreen({ user, answers, onReset }){
         <p>{character.summary}</p>
         <div className="tag-row">{character.tags.map(t=><span key={t}>{t}</span>)}</div>
         <div className="character-frame">
-          {!imgError ? <img src={img} onError={()=>setImgError(true)} alt={`${displayName} 캐릭터 이미지`} /> : <PlaceholderCharacter gender={user.gender} weapon={user.weaponLabel} typeName={character.characterName} />}
+          {!imgError ? <img src={img} onError={()=>setImgError(true)} alt={`${displayName} 캐릭터 이미지`} /> : <PlaceholderCharacter />}
         </div>
       </section>
       <section className="dual-card">
@@ -141,7 +257,6 @@ function ResultScreen({ user, answers, onReset }){
       </section>
       <section className="info-card">
         <h3>캐릭터 해석</h3>
-        <ResultBlock title="첫인상" text={character.interpretation.firstImpression} />
         <ResultBlock title="외모 분위기" text={character.interpretation.appearance} />
         <ResultBlock title="플레이 스타일" text={character.interpretation.playStyleText} />
         <ResultBlock title="성격/소통 방식" text={character.interpretation.personalityText} />
@@ -149,11 +264,12 @@ function ResultScreen({ user, answers, onReset }){
         <ResultBlock title="장점" text={character.interpretation.strengths} />
         <ResultBlock title="단점" text={character.interpretation.weaknesses} />
       </section>
-      <section className="scene-card success"><h3><Trophy size={19}/> 세이브 성공 상황</h3><p>{character.saveSuccessScene}</p><div className="quote"><CheckCircle2 size={17}/>{character.successQuote}</div></section>
+      <section className="scene-card success"><h3><Trophy size={19}/> 인상적인 상황</h3><p>{character.impressiveScene}</p><div className="quote"><CheckCircle2 size={17}/>{character.successQuote}</div></section>
       <section className="scene-card death"><h3><Skull size={19}/> 죽었을 때 상황</h3><p>{character.deathScene}</p><div className="quote">“{character.lastQuote}”</div></section>
-      <div className="result-actions">
+      <div className="result-actions profile-actions">
         <button className="secondary" onClick={onReset}><RotateCcw size={17}/> 다시 테스트</button>
-        <button className="primary" onClick={handleShare}><Share2 size={17}/> 결과 공유</button>
+        <button className="primary" onClick={() => downloadProfileImage({ user, character, displayName, imageUrl: img, imageFailed: imgError })}><Download size={17}/> 프로필사진 다운로드</button>
+        <button className="primary share-btn" onClick={handleShare}><Share2 size={17}/> 결과 공유</button>
       </div>
     </main>
   );

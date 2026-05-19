@@ -2,27 +2,31 @@
 
 모바일 최적화 FPS 클랜전 스타일 테스트입니다.
 
-## 실행
-```bash
-npm install
-npm run dev
-```
+## 포함 기능
 
-## 배포
-Vercel에서 Framework Preset은 Vite, Build Command는 `npm run build`, Output Directory는 `dist`를 사용합니다.
+- 30문항 테스트
+- 진행률 표시
+- 이전 문항 이동 및 선택 유지
+- 플레이 스타일 + 성격/소통 성향 조합형 결과
+- 첫인상 제거
+- 외모 분위기/플레이 해석/성격 해석/장단점 표시
+- `세이브 성공 상황` 대신 `인상적인 상황` 표시
+- 죽었을 때 상황 및 마지막 한마디 표시
+- 결과 페이지 하단 프로필사진 다운로드 버튼
+- 이미지 미등록 시 기본 실루엣 표시
 
-## 캐릭터 이미지 규칙
-이미지는 `public/result_characters/` 폴더에 넣습니다.
+## 이미지 파일 규칙
 
-파일명:
+캐릭터 이미지는 아래 경로에 넣습니다.
+
 ```text
-{결과ID}_{gender}_{weaponKey}.webp
+public/result_characters/{결과ID}_{gender}_{weaponKey}.webp
 ```
 
-예:
+예시:
+
 ```text
-P1_M2_female_AK47.webp
-S13_male_AWP.webp
+public/result_characters/P1_M2_female_AK47.webp
+public/result_characters/S13_male_AWP.webp
 ```
 
-이미지가 없으면 기본 플레이스홀더가 표시됩니다.
