@@ -77,16 +77,20 @@ function Start({user,setUser,onStart}){
 
 function Result({user,result,onRestart,onShare}){
  const [imgError,setImgError] = useState(false);
+ const [defaultError,setDefaultError] = useState(false);
+ const genderKey = user.gender === '남자' ? 'male' : 'female';
+ const fallbackImage = `/result_characters/default_${genderKey}.webp`;
  return <main className="result-page">
   <section className="result-hero card">
     <div className="result-top"><span>FPS 성향 테스트 결과</span><span>YOUR TYPE</span></div>
     <div className="hero-grid">
       <div className="image-box">
-        {!imgError ? <img src={result.imagePath} onError={()=>setImgError(true)} alt="캐릭터 이미지"/> : <Placeholder gender={user.gender} weapon={user.weapon}/>} 
+        {!imgError ? <img src={result.imagePath} onError={()=>setImgError(true)} alt="캐릭터 이미지"/> : (!defaultError ? <img src={fallbackImage} onError={()=>setDefaultError(true)} alt="기본 캐릭터 이미지"/> : <Placeholder gender={user.gender} weapon={user.weapon}/>)} 
       </div>
       <div className="hero-text">
-        <p className="nickname">{user.nickname} 님의 유형은...</p>
-        <h1>{result.typeName}</h1>
+        <p className="nickname">{user.nickname} 님의 캐릭터</p>
+        <h1 className="character-name">{result.characterName}</h1>
+        <div className="type-name">{result.typeName}</div>
         <p className="summary">{result.summary}</p>
         <div className="chips">{result.tags.map(t=><span key={t}>{t}</span>)}</div>
         <div className="axis-box"><div><b>플레이 스타일</b><span>{result.playStyle}</span></div><div><b>성격/소통</b><span>{result.personalityStyle}</span></div></div>
