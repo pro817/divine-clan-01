@@ -1,3 +1,17 @@
+# Vercel Security Patch 수정본
+
+이 버전은 Vercel이 차단한 Next.js 보안 취약 버전 문제를 해결하기 위해 `next`를 `15.5.7`로 고정했습니다.
+
+수정 사항:
+- `next`: `15.5.6` → `15.5.7`
+- `vercel.json`에서 `outputDirectory`: `.next`
+- npm 공식 registry 강제
+- lock 파일 생성 방지
+
+GitHub에는 이 ZIP 안의 파일을 그대로 올리면 됩니다.
+
+---
+
 # Vercel Output Directory 수정본
 
 이번 ZIP은 Vercel이 `dist` 폴더를 찾는 문제를 막기 위해 `vercel.json`에서 Next.js 빌드 출력 폴더를 `.next`로 고정했습니다.
