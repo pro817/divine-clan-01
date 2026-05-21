@@ -91,7 +91,7 @@ export function StartPage({ onStart }: { onStart: (profile: UserProfile) => void
         <input
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
-          placeholder="예: 예둥"
+          placeholder="EX)디바인"
           className="input"
         />
       </section>
