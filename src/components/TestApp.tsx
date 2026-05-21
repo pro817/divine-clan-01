@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { questions } from "@/data/questions";
 import { weaponGroups, type Gender } from "@/data/weapons";
 import { calculateResult, type AnswerMap } from "@/lib/scoring";
@@ -155,6 +155,10 @@ export function TestPage({
   const q = questions[current];
   const selected = answers[q.id];
   const progress = Math.round(((current + 1) / questions.length) * 100);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [current]);
 
   function selectOption(optionId: string) {
     setAnswers((prev) => ({ ...prev, [q.id]: optionId }));
