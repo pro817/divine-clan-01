@@ -1,3 +1,14 @@
+# Vercel 강제 정리 배포본
+
+이번 ZIP은 기존 GitHub repo에 남아 있을 수 있는 `node_modules`, `package-lock.json`, `.npmrc` 문제까지 Vercel 빌드 시점에 강제로 제거하도록 `vercel.json`을 포함합니다.
+
+핵심:
+- Vercel installCommand에서 `node_modules`, lock 파일, 기존 `.npmrc` 제거
+- npm registry를 `https://registry.npmjs.org/`로 강제
+- 새 `.npmrc`도 npmjs registry로 고정
+
+---
+
 # Vercel 배포용 수정본
 
 이 ZIP은 Vercel `npm install` 단계에서 내부 registry를 보지 않도록 정리한 버전입니다.

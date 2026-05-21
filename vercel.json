@@ -1,0 +1,4 @@
+{
+  "installCommand": "rm -rf node_modules package-lock.json pnpm-lock.yaml yarn.lock .npmrc && npm install --no-audit --no-fund --no-package-lock --registry=https://registry.npmjs.org/",
+  "buildCommand": "npm run build"
+}
