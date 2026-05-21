@@ -1,3 +1,16 @@
+# Vercel Output Directory 수정본
+
+이번 ZIP은 Vercel이 `dist` 폴더를 찾는 문제를 막기 위해 `vercel.json`에서 Next.js 빌드 출력 폴더를 `.next`로 고정했습니다.
+
+핵심:
+- `framework`: `nextjs`
+- `outputDirectory`: `.next`
+- 기존 lock 파일 제거 후 npm 공식 registry로 설치
+
+GitHub에는 이 ZIP 안의 파일을 그대로 올리면 됩니다.
+
+---
+
 # Vercel 강제 정리 배포본
 
 이번 ZIP은 기존 GitHub repo에 남아 있을 수 있는 `node_modules`, `package-lock.json`, `.npmrc` 문제까지 Vercel 빌드 시점에 강제로 제거하도록 `vercel.json`을 포함합니다.
