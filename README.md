@@ -1,3 +1,15 @@
+# 최종 검증본
+
+이 버전은 업로드된 최종 문항 Q1~Q26과 특수 캐릭터 문항 Q27~Q30을 반영한 Vercel 배포용 파일입니다.
+
+- Q1~Q26: 사용자 업로드 원문 기준
+- Q27~Q30: 특수 캐릭터 보정 문항
+- Next.js: 15.5.7
+- 이미지 폴더: `/public/profile-images`
+- 프로필 이미지 파일명: `{profileCode}.png`
+
+---
+
 # Vercel Security Patch 수정본
 
 이 버전은 Vercel이 차단한 Next.js 보안 취약 버전 문제를 해결하기 위해 `next`를 `15.5.7`로 고정했습니다.
