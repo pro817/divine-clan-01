@@ -588,3 +588,100 @@ li + li {
   color: rgba(246, 239, 229, 0.54);
   box-shadow: none;
 }
+
+
+.profile-capture-target {
+  isolation: isolate;
+}
+
+.character-image.hidden-until-load {
+  display: none;
+}
+
+.action-card {
+  padding-top: 22px;
+}
+
+.profile-code-box {
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 231, 170, 0.16);
+  background: rgba(255,255,255,0.035);
+}
+
+.profile-code-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.profile-code-box code {
+  display: block;
+  color: var(--gold2);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  word-break: break-all;
+}
+
+.result-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.radar-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0 14px;
+}
+
+.radar-svg {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  overflow: visible;
+}
+
+.radar-ring {
+  fill: none;
+  stroke: rgba(255, 231, 170, 0.16);
+  stroke-width: 1;
+}
+
+.radar-axis {
+  stroke: rgba(255, 231, 170, 0.18);
+  stroke-width: 1;
+}
+
+.radar-value-area {
+  fill: rgba(243, 198, 109, 0.42);
+  stroke: rgba(255, 231, 170, 0.85);
+  stroke-width: 2;
+}
+
+.radar-dot {
+  fill: var(--gold2);
+  stroke: #2d2209;
+  stroke-width: 1.2;
+}
+
+.radar-label {
+  fill: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.radar-score {
+  fill: var(--gold2);
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.analysis-copy {
+  margin-top: 8px;
+  color: var(--muted);
+}
