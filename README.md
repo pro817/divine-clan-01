@@ -1,3 +1,18 @@
+# Vercel 배포용 수정본
+
+이 ZIP은 Vercel `npm install` 단계에서 내부 registry를 보지 않도록 정리한 버전입니다.
+
+포함하지 않은 파일:
+- `package-lock.json`
+- `pnpm-lock.yaml`
+- `yarn.lock`
+- `.npmrc`
+- `node_modules`
+
+GitHub에는 이 ZIP 안의 파일만 올리면 됩니다.
+
+---
+
 # A보급 클랜전 성향 테스트
 
 모바일 세로형 테스트 페이지 최종 구조입니다.
