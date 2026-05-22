@@ -1,21 +1,22 @@
-# V8 Transparent Skin Surface
+# Premium Fantasy Skin v9
 
-수정 목표:
-- 텍스트 영역이 스킨을 가리는 문제 수정
-- 카드 자체를 불투명 박스로 만들지 않음
-- 프레임은 9-slice 레이어
-- 패널 질감은 surface 레이어
-- 텍스트 가독성은 얇은 오버레이만 사용
+이번 버전은 단색화 문제를 피하기 위해 카드 표면에 실제 생성 PNG를 직접 노출합니다.
 
-핵심 변경:
-1. `background: rgba(... .96/.98)` 계열 제거
-2. `panel-surface.png`, `hero-surface.png` 추가
-3. 카드 `::after`에 스킨 질감 레이어 적용
-4. 카드 `::before`에 프레임 레이어 적용
-5. 버튼/선택지/입력칸도 반투명으로 수정
+구조:
+- 카드 자체 background: transparent
+- ::after: 실제 패널/히어로/포트레이트 PNG 스킨
+- ::before: 얇은 가독성 오버레이
+- 텍스트: 최상단 z-index
 
-자산 경로:
-- `/public/ui/fantasy-v8/`
+핵심:
+- 텍스트 영역이 스킨을 가리지 않도록 불투명 배경 제거
+- generated PNG가 실제 화면에 보이도록 full-skin 방식 적용
+- 입력칸/선택지/버튼은 반투명 처리
+
+샘플 이미지:
+- `/mnt/data/premium_v9_start_sample.png`
+- `/mnt/data/premium_v9_question_sample.png`
+- `/mnt/data/premium_v9_result_sample.png`
 
 ---
 
