@@ -2157,3 +2157,335 @@ li {
     font-size: 1.14rem !important;
   }
 }
+
+
+/* =========================
+   V7 FIX: visible-bbox 9-slice premium frame
+   Reason: v6 sliced transparent outer canvas, so frames were invisible/simple.
+   ========================= */
+
+body {
+  background:
+    linear-gradient(180deg, rgba(3,7,17,.12), rgba(3,7,17,.90)),
+    url("/ui/fantasy-v7/page-bg.png") center top / cover no-repeat,
+    #030711 !important;
+}
+
+/* Stronger content readability over generated background */
+.page {
+  width: min(100%, 454px) !important;
+  padding: 18px 13px 36px !important;
+}
+
+.result-capture-area {
+  background: transparent !important;
+}
+
+/* reset previous pseudo frame layers first */
+.start-page .card::before,
+.start-page .hero-card::before,
+.test-page .card::before,
+.test-page .progress-card::before,
+.result-card::before,
+.image-card::before,
+.result-card-hero::before {
+  content: "" !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
+.start-page .card::after,
+.start-page .hero-card::after,
+.test-page .card::after,
+.test-page .progress-card::after,
+.result-card::after {
+  content: "" !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  border: 1px solid rgba(255, 240, 189, .10) !important;
+  border-radius: 17px !important;
+  inset: 16px !important;
+  background: none !important;
+}
+
+/* base panel keeps safe text area; frame is outside edges only */
+.start-page .card,
+.test-page .card,
+.test-page .progress-card,
+.result-card {
+  position: relative !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 24px !important;
+  padding: 27px 25px !important;
+  background:
+    radial-gradient(circle at 50% -18%, rgba(255,240,189,.10), transparent 40%),
+    linear-gradient(180deg, rgba(8,18,34,.96), rgba(3,8,18,.985)) !important;
+  box-shadow:
+    0 28px 70px rgba(0,0,0,.58),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -30px 62px rgba(0,0,0,.33) !important;
+}
+
+/* actual visible panel frame, sliced from bbox */
+.start-page .card::before,
+.test-page .card::before,
+.test-page .progress-card::before,
+.result-card:not(.result-card-hero)::before {
+  inset: -13px !important;
+  border-radius: 28px !important;
+  background:
+    url("/ui/fantasy-v7/panel-tl.png") left top / 82px 82px no-repeat,
+    url("/ui/fantasy-v7/panel-tr.png") right top / 82px 82px no-repeat,
+    url("/ui/fantasy-v7/panel-bl.png") left bottom / 82px 82px no-repeat,
+    url("/ui/fantasy-v7/panel-br.png") right bottom / 82px 82px no-repeat,
+    url("/ui/fantasy-v7/panel-top.png") center top / calc(100% - 128px) 30px no-repeat,
+    url("/ui/fantasy-v7/panel-bottom.png") center bottom / calc(100% - 128px) 30px no-repeat,
+    url("/ui/fantasy-v7/panel-left.png") left center / 30px calc(100% - 128px) no-repeat,
+    url("/ui/fantasy-v7/panel-right.png") right center / 30px calc(100% - 128px) no-repeat !important;
+  filter: drop-shadow(0 0 10px rgba(214,168,91,.14));
+}
+
+/* hero frame larger */
+.start-page .hero-card,
+.result-card-hero {
+  position: relative !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 30px !important;
+  padding: 34px 28px 32px !important;
+  min-height: 285px !important;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(45,130,255,.16), transparent 34%),
+    radial-gradient(circle at 50% -14%, rgba(255,240,189,.14), transparent 42%),
+    linear-gradient(180deg, rgba(8,19,38,.975), rgba(3,8,18,.99)) !important;
+  box-shadow:
+    0 30px 78px rgba(0,0,0,.62),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -34px 66px rgba(0,0,0,.34) !important;
+}
+
+.start-page .hero-card::before,
+.result-card-hero::before {
+  inset: -15px !important;
+  border-radius: 34px !important;
+  background:
+    url("/ui/fantasy-v7/hero-tl.png") left top / 88px 88px no-repeat,
+    url("/ui/fantasy-v7/hero-tr.png") right top / 88px 88px no-repeat,
+    url("/ui/fantasy-v7/hero-bl.png") left bottom / 88px 88px no-repeat,
+    url("/ui/fantasy-v7/hero-br.png") right bottom / 88px 88px no-repeat,
+    url("/ui/fantasy-v7/hero-top.png") center top / calc(100% - 140px) 32px no-repeat,
+    url("/ui/fantasy-v7/hero-bottom.png") center bottom / calc(100% - 140px) 32px no-repeat,
+    url("/ui/fantasy-v7/hero-left.png") left center / 32px calc(100% - 140px) no-repeat,
+    url("/ui/fantasy-v7/hero-right.png") right center / 32px calc(100% - 140px) no-repeat !important;
+  filter: drop-shadow(0 0 12px rgba(214,168,91,.18));
+}
+
+/* keep actual content over frame */
+.start-page .card > *,
+.start-page .hero-card > *,
+.test-page .card > *,
+.test-page .progress-card > *,
+.result-card > * {
+  position: relative !important;
+  z-index: 4 !important;
+}
+
+/* Extra golden header polish */
+.result-hero,
+.start-page .hero-card {
+  text-align: center !important;
+}
+
+.result-hero h1,
+.start-page .hero-card h1 {
+  color: #fff0bd !important;
+  text-shadow:
+    0 1px 0 rgba(0,0,0,.95),
+    0 0 20px rgba(214,168,91,.42),
+    0 0 4px rgba(255,240,189,.30) !important;
+}
+
+.result-hero h2 {
+  color: #e8c576 !important;
+}
+
+.subtitle,
+.result-hero .quote,
+.eyebrow {
+  color: #fff0bd !important;
+}
+
+/* image frame */
+.image-card {
+  min-height: 435px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.image-card::before {
+  inset: -15px !important;
+  border-radius: 34px !important;
+  background:
+    url("/ui/fantasy-v7/hero-tl.png") left top / 88px 88px no-repeat,
+    url("/ui/fantasy-v7/hero-tr.png") right top / 88px 88px no-repeat,
+    url("/ui/fantasy-v7/hero-bl.png") left bottom / 88px 88px no-repeat,
+    url("/ui/fantasy-v7/hero-br.png") right bottom / 88px 88px no-repeat,
+    url("/ui/fantasy-v7/hero-top.png") center top / calc(100% - 140px) 32px no-repeat,
+    url("/ui/fantasy-v7/hero-bottom.png") center bottom / calc(100% - 140px) 32px no-repeat,
+    url("/ui/fantasy-v7/hero-left.png") left center / 32px calc(100% - 140px) no-repeat,
+    url("/ui/fantasy-v7/hero-right.png") right center / 32px calc(100% - 140px) no-repeat !important;
+}
+
+.image-card::after {
+  inset: 22px !important;
+  border-radius: 24px !important;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255,240,189,.16), transparent 36%),
+    radial-gradient(circle at 50% 32%, rgba(45,130,255,.12), transparent 54%) !important;
+  border: 1px solid rgba(255,240,189,.09) !important;
+}
+
+/* section title */
+.result-section h3 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-bottom: 16px !important;
+}
+
+.result-section h3::before {
+  content: "" !important;
+  width: 34px !important;
+  height: 34px !important;
+  flex: 0 0 34px !important;
+  background: url("/ui/fantasy-v7/icon-interpretation.png") center / contain no-repeat !important;
+  filter: drop-shadow(0 0 9px rgba(214,168,91,.24));
+}
+
+.appearance-section h3::before { background-image: url("/ui/fantasy-v7/icon-appearance.png") !important; }
+.analysis-section h3::before { background-image: url("/ui/fantasy-v7/icon-profile.png") !important; }
+.interpretation-section h3::before { background-image: url("/ui/fantasy-v7/icon-interpretation.png") !important; }
+.memorable-section h3::before { background-image: url("/ui/fantasy-v7/icon-situation.png") !important; }
+.death-section h3::before { background-image: url("/ui/fantasy-v7/icon-death.png") !important; }
+.strength-section h3::before { background-image: url("/ui/fantasy-v7/icon-strength.png") !important; }
+.weakness-section h3::before { background-image: url("/ui/fantasy-v7/icon-weakness.png") !important; }
+.keyword-section h3::before { background-image: url("/ui/fantasy-v7/icon-keyword.png") !important; }
+
+.result-section h3::after {
+  content: "" !important;
+  display: block !important;
+  flex: 1 1 auto !important;
+  height: 14px !important;
+  margin-top: 0 !important;
+  background: url("/ui/fantasy-v7/divider.png") left center / auto 14px no-repeat !important;
+  opacity: .96 !important;
+}
+
+/* make controls refined but non-overlapping */
+.primary,
+.secondary,
+.segmented button,
+.weapon-grid button,
+.option-card,
+.input,
+.profile-code-box {
+  border: 1px solid rgba(230,201,138,.38) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -9px 18px rgba(0,0,0,.26) !important;
+}
+
+.primary,
+.secondary {
+  min-height: 58px !important;
+  border-radius: 18px !important;
+  color: #fff2cc !important;
+}
+
+.primary {
+  background:
+    linear-gradient(180deg, rgba(255,240,189,.24), rgba(116,74,22,.40)),
+    rgba(42,25,8,.95) !important;
+}
+
+.secondary {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.055), rgba(0,0,0,.22)),
+    rgba(6,14,27,.93) !important;
+}
+
+.option-card {
+  border-radius: 19px !important;
+  min-height: 72px !important;
+}
+
+.option-letter {
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,240,189,.22) !important;
+  background: rgba(255,240,189,.075) !important;
+  color: #fff0bd !important;
+}
+
+.option-card.selected .option-letter {
+  background: #fff0bd !important;
+  color: #1b1305 !important;
+}
+
+.tag-list span,
+.keyword-list span {
+  border: 1px solid rgba(230,201,138,.38) !important;
+  border-radius: 13px !important;
+  background:
+    linear-gradient(180deg, rgba(255,240,189,.075), rgba(0,0,0,.16)),
+    rgba(5,13,26,.92) !important;
+  color: #fff0bd !important;
+}
+
+/* restore sticky bars without hiding frame */
+.progress-card {
+  position: sticky !important;
+  top: 0;
+  z-index: 20 !important;
+}
+
+.bottom-nav {
+  z-index: 21 !important;
+}
+
+/* graph spacing */
+.analysis-section {
+  min-height: 450px !important;
+}
+
+.radar-wrap {
+  margin: 10px 0 18px !important;
+}
+
+.radar-svg {
+  max-width: 312px !important;
+}
+
+/* mobile compensation */
+@media (max-width: 390px) {
+  .start-page .card,
+  .test-page .card,
+  .test-page .progress-card,
+  .result-card {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+
+  .result-card-hero {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .result-hero h1 {
+    font-size: 2.15rem !important;
+  }
+}

@@ -1,3 +1,28 @@
+# V7 Visible Frame 9-slice Skin
+
+v6에서 비주얼이 단순해진 직접 원인:
+- 9-slice를 만들 때 원본 PNG의 투명 여백까지 포함해서 잘랐고,
+- 특히 panel corner 일부가 완전히 투명한 조각으로 생성되었습니다.
+- 그래서 실제 프레임이 화면에 거의 나타나지 않았습니다.
+
+v7 수정:
+- 원본 PNG의 alpha bounding box를 먼저 구한 뒤, 실제 보이는 프레임 영역에서 9-slice 생성
+- 카드/히어로/이미지 영역에 visible-bbox 기반 프레임 적용
+- 텍스트 영역은 padding으로 분리하여 겹침 방지
+
+Debug:
+- panel visible size: (1397, 676)
+- hero visible size: (1995, 519)
+
+자산 경로:
+- `/public/ui/fantasy-v7/`
+
+핵심 파일:
+- `src/app/globals.css`
+- `public/ui/fantasy-v7/*`
+
+---
+
 # Asset Skin v5 Fixed
 
 v4의 글자/장식 겹침 문제를 수정한 안정화 버전입니다.
