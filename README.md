@@ -1,3 +1,63 @@
+# PNG Asset Fantasy Skin v4
+
+이미지 생성으로 만든 실제 PNG 자산을 프로젝트에 적용한 버전입니다.
+
+추가 자산 경로:
+- `/public/ui/fantasy-png/`
+
+주요 자산:
+- `page-bg.png`
+- `hero-frame.png`
+- `portrait-frame.png`
+- `panel-frame.png`
+- `button-blue.png`
+- `button-gold.png`
+- `button-dark.png`
+- `divider.png`
+- `icon-*.png`
+
+적용 방식:
+- 텍스트/레이아웃은 React/HTML 유지
+- 배경, 프레임, 버튼, 아이콘, 구분선만 PNG 자산으로 적용
+- 문항페이지 카테고리 배지 제거
+- 결과페이지 하단 버튼 순서 정리
+
+---
+
+# Fantasy Premium Skin v3
+
+실제 고급 판타지 UI를 위해 장식 SVG 자산을 새로 만든 버전입니다.
+
+추가 자산:
+- `/public/ui/fantasy/card-ornate-frame.svg`
+- `/public/ui/fantasy/hero-ornate-frame.svg`
+- `/public/ui/fantasy/button-ornate-frame.svg`
+- `/public/ui/fantasy/title-divider-ornate.svg`
+- `/public/ui/fantasy/magic-halo.svg`
+- `/public/ui/fantasy/bg-texture.svg`
+- `/public/ui/fantasy/icon-*.svg`
+
+핵심 수정:
+- 문항 카테고리 배지 제거
+- 카드/버튼/디바이더/아이콘 장식 자산 적용
+- 결과페이지 하단 버튼 순서 정리
+
+---
+
+# Step 1 구조/스킨 수정본
+
+수정 내용:
+1. 테스트 문항 상단의 `[플레이 스타일]`, `[성격/소통]`, `[특수 성향] 배지 제거
+2. 결과페이지 전용 클래스 구조 추가
+3. 테스트 화면 공통 카드와 결과페이지 카드 스킨 분리
+4. 결과페이지 카드 입체감, 금장 테두리, 하단 버튼 세로 구조 유지
+
+핵심 수정 파일:
+- `src/components/TestApp.tsx`
+- `src/app/globals.css`
+
+---
+
 # 결과페이지 기능 + 고풍 스킨 적용본
 
 반영 내용:

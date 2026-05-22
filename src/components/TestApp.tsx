@@ -124,7 +124,7 @@ function ProfileImageCard({
   }
 
   return (
-    <section className="card image-card profile-capture-target">
+    <section className="result-card image-card profile-capture-target">
       <img
         src={imageUrl}
         alt={`${characterTitle} 캐릭터 이미지`}
@@ -265,7 +265,6 @@ export function TestPage({
       </section>
 
       <section className="card question-card">
-        <p className="eyebrow">{q.category === "play" ? "플레이 스타일" : q.category === "comm" ? "성격 / 소통" : "특수 성향"}</p>
         <h2>{q.title}</h2>
         {q.description && <p className="question-desc">{q.description}</p>}
 
@@ -312,6 +311,7 @@ export function ResultPage({
   const imageUrl = getProfileImageUrl(profileCode);
 
   const [copied, setCopied] = useState(false);
+  const [shared, setShared] = useState(false);
   const [savingResult, setSavingResult] = useState(false);
   const [savingProfile, setSavingProfile] = useState(false);
   const [imageExists, setImageExists] = useState(false);
@@ -331,6 +331,20 @@ export function ResultPage({
     await copyText(profileCode);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1400);
+  }
+
+  async function handleShareResult() {
+    const title = `${user.nickname}님의 캐릭터 - ${data.character_title}`;
+    const text = `${displayName} / ${data.character_title}\n${data.subtitle}\n프로필코드: ${profileCode}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title, text, url: window.location.href });
+      } else {
+        await copyText(`${title}\n${text}\n${window.location.href}`);
+      }
+      setShared(true);
+      window.setTimeout(() => setShared(false), 1400);
+    } catch {}
   }
 
   async function handleSaveResult() {
@@ -366,7 +380,7 @@ export function ResultPage({
   return (
     <main className="page result-page">
       <div ref={resultRef} className="result-capture-area">
-        <section className="result-hero card">
+        <section className="result-hero result-card result-card-hero">
           <p className="eyebrow">테스트 결과</p>
           <p className="owner">{user.nickname}님의 캐릭터</p>
           <h2>{displayName}</h2>
@@ -383,12 +397,12 @@ export function ResultPage({
           ))}
         </section>
 
-        <section className="card">
+        <section className="result-card result-section appearance-section">
           <h3>외모로 풍기는 분위기</h3>
           <p>{data.appearance_mood}</p>
         </section>
 
-        <section className="card">
+        <section className="result-card result-section analysis-section">
           <h3>당신의 성향 분석</h3>
           <RadarChart items={statItems} />
           <p className="analysis-copy">
@@ -396,24 +410,24 @@ export function ResultPage({
           </p>
         </section>
 
-        <section className="card">
+        <section className="result-card result-section interpretation-section">
           <h3>캐릭터 해석</h3>
           <p>{data.interpretation}</p>
         </section>
 
-        <section className="card">
+        <section className="result-card result-section memorable-section">
           <h3>인상적인 상황</h3>
           <p>{data.memorable_situation}</p>
           <p className="quote small">“{data.memorable_quote}”</p>
         </section>
 
-        <section className="card">
+        <section className="result-card result-section death-section">
           <h3>죽었을 때 상황</h3>
           <p>{data.death_situation}</p>
           <p className="quote small">“{data.death_quote}”</p>
         </section>
 
-        <section className="card">
+        <section className="result-card result-section strength-section">
           <h3>당신의 강점</h3>
           <ul>
             {data.strengths.map((item) => (
@@ -422,7 +436,7 @@ export function ResultPage({
           </ul>
         </section>
 
-        <section className="card">
+        <section className="result-card result-section weakness-section">
           <h3>당신의 약점</h3>
           <ul>
             {data.weaknesses.map((item) => (
@@ -431,7 +445,7 @@ export function ResultPage({
           </ul>
         </section>
 
-        <section className="card">
+        <section className="result-card result-section keyword-section">
           <h3>당신을 표현하는 키워드</h3>
           <div className="keyword-list">
             {data.keywords.map((item) => (
@@ -441,7 +455,7 @@ export function ResultPage({
         </section>
       </div>
 
-      <section className="card action-card">
+      <section className="result-card result-section action-card">
         <h3>결과 활용</h3>
         <p className="helper">프로필코드를 복사해두면 이후 같은 결과에 등록된 이미지를 자동으로 불러올 수 있습니다.</p>
         <div className="profile-code-box">
@@ -452,14 +466,17 @@ export function ResultPage({
           <button type="button" className="secondary" onClick={onRestart}>
             다시 테스트하기
           </button>
-          <button type="button" className="secondary" onClick={handleCopyProfileCode}>
-            {copied ? "복사 완료" : "프로필 코드 복사하기"}
+          <button type="button" className="secondary share-action" onClick={handleShareResult}>
+            {shared ? "공유 준비 완료" : "결과 공유하기"}
           </button>
-          <button type="button" className="primary" onClick={handleSaveResult} disabled={savingResult}>
+          <button type="button" className="primary save-result-action" onClick={handleSaveResult} disabled={savingResult}>
             {savingResult ? "저장 중..." : "결과 저장하기"}
           </button>
-          <button type="button" className="primary" onClick={handleSaveProfile} disabled={!imageExists || savingProfile}>
+          <button type="button" className="primary save-profile-action" onClick={handleSaveProfile} disabled={!imageExists || savingProfile}>
             {!imageExists ? "프로필 저장하기 (이미지 없음)" : savingProfile ? "저장 중..." : "프로필 저장하기"}
+          </button>
+          <button type="button" className="secondary code-action" onClick={handleCopyProfileCode}>
+            {copied ? "복사 완료" : "프로필 코드 복사하기"}
           </button>
         </nav>
       </section>

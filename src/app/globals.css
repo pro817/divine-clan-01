@@ -676,3 +676,645 @@ li + li {
   color: rgba(246, 239, 229, 0.54);
   box-shadow: none;
 }
+
+
+/* ---------- step1: 테스트 문항 배지 제거 + 결과페이지 전용 스킨 분리 ---------- */
+.question-card > .eyebrow {
+  display: none !important;
+}
+
+.question-card {
+  padding-top: 28px;
+}
+
+.test-page .card,
+.start-page .card,
+.start-page .hero-card,
+.test-page .progress-card {
+  border-color: rgba(214, 168, 91, 0.38);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.045), rgba(0,0,0,0.09)),
+    rgba(10, 18, 31, 0.92);
+}
+
+.result-page {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.result-capture-area {
+  position: relative;
+  padding: 0 0 1px;
+}
+
+.result-card {
+  position: relative;
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 22px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(218, 169, 82, 0.62);
+  background:
+    radial-gradient(circle at 50% -16%, rgba(255, 226, 160, 0.115), transparent 42%),
+    linear-gradient(180deg, rgba(15, 28, 48, 0.98), rgba(5, 12, 24, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    inset 0 -28px 52px rgba(0,0,0,0.28),
+    0 18px 48px rgba(0,0,0,0.42);
+}
+
+.result-card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  pointer-events: none;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 226, 160, 0.16);
+}
+
+.result-card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255,226,160,0.12), transparent 18%),
+    linear-gradient(315deg, rgba(255,226,160,0.08), transparent 18%),
+    radial-gradient(circle at 88% 12%, rgba(119,216,255,0.06), transparent 28%);
+  opacity: 0.9;
+}
+
+.result-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.result-card-hero {
+  min-height: 265px;
+  text-align: left;
+  padding: 28px 22px 24px;
+  background:
+    radial-gradient(circle at 88% 2%, rgba(255, 226, 160, 0.16), transparent 34%),
+    radial-gradient(circle at 10% 90%, rgba(119, 216, 255, 0.08), transparent 36%),
+    linear-gradient(160deg, rgba(12, 24, 42, 0.99), rgba(4, 10, 20, 0.99));
+}
+
+.result-hero .eyebrow {
+  margin-bottom: 14px;
+}
+
+.result-hero .owner {
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.result-hero h2 {
+  color: var(--gold);
+  font-size: 1.95rem;
+  margin-bottom: 8px;
+}
+
+.result-hero h1 {
+  color: var(--gold2);
+  font-size: clamp(2.35rem, 12vw, 3.35rem);
+  line-height: 1.08;
+  margin-bottom: 10px;
+  text-shadow: 0 0 22px rgba(214,168,91,0.24);
+}
+
+.result-hero .subtitle {
+  color: var(--gold2);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.result-hero .quote {
+  margin-top: 18px;
+}
+
+.image-card {
+  min-height: 420px;
+  padding: 0;
+}
+
+.image-card::before {
+  border-color: rgba(255, 226, 160, 0.20);
+}
+
+.character-image {
+  width: 100%;
+  aspect-ratio: 1 / 1.16;
+  object-fit: cover;
+  display: block;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 4px 0 16px;
+  padding: 0 2px;
+}
+
+.tag-list span,
+.keyword-list span {
+  border: 1px solid rgba(214, 168, 91, 0.64);
+  border-radius: 13px;
+  background:
+    linear-gradient(180deg, rgba(255,226,160,0.075), rgba(0,0,0,0.15)),
+    rgba(8, 17, 31, 0.86);
+  color: var(--gold2);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.result-section h3 {
+  font-size: 1.26rem;
+  color: var(--gold2);
+  margin-bottom: 16px;
+}
+
+.result-section h3::after {
+  content: "";
+  display: block;
+  width: 92px;
+  height: 1px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, var(--gold2), rgba(255,226,160,0));
+}
+
+.memorable-section h3,
+.strength-section h3 {
+  color: var(--blue);
+}
+
+.death-section h3,
+.weakness-section h3 {
+  color: var(--violet);
+}
+
+.analysis-section {
+  min-height: 440px;
+}
+
+.radar-wrap {
+  margin: 4px 0 12px;
+}
+
+.radar-svg {
+  max-width: 310px;
+}
+
+.analysis-copy {
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 8px;
+}
+
+.result-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.action-card .helper {
+  margin-bottom: 14px;
+}
+
+.profile-code-box {
+  margin: 14px 0 18px;
+}
+
+/* ---------- Fantasy Premium Skin v3 : actual ornament assets ---------- */
+body {
+  background:
+    url("/ui/fantasy/bg-texture.svg"),
+    radial-gradient(circle at 8% -5%, rgba(214,168,91,.28), transparent 32%),
+    radial-gradient(circle at 94% 0%, rgba(45,130,255,.18), transparent 30%),
+    linear-gradient(180deg, #08101d 0%, #030711 68%, #01030a 100%);
+  background-size: 360px 360px, auto, auto, auto;
+}
+body::after {
+  background:
+    url("/ui/fantasy/bg-texture.svg"),
+    radial-gradient(circle at 50% 12%, transparent 0%, rgba(0,0,0,.45) 76%);
+  background-size: 360px 360px, auto;
+  opacity: .72;
+}
+.question-card > .eyebrow { display: none !important; }
+.start-page .card,
+.start-page .hero-card,
+.test-page .card,
+.test-page .progress-card,
+.result-card {
+  position: relative;
+  border: 0 !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,226,160,.13), transparent 38%),
+    linear-gradient(180deg, rgba(13,30,54,.98), rgba(4,12,24,.99));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.11),
+    inset 0 -30px 58px rgba(0,0,0,.32),
+    0 18px 54px rgba(0,0,0,.50),
+    0 0 28px rgba(214,168,91,.055);
+}
+.start-page .card::before,
+.test-page .card::before,
+.test-page .progress-card::before,
+.result-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  border: 0 !important;
+  background: url("/ui/fantasy/card-ornate-frame.svg") center / 100% 100% no-repeat;
+  opacity: 1;
+}
+.start-page .hero-card::before,
+.result-card-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    url("/ui/fantasy/hero-ornate-frame.svg") center / 100% 100% no-repeat,
+    url("/ui/fantasy/magic-halo.svg") right -78px top -92px / 250px 250px no-repeat;
+  opacity: 1;
+}
+.start-page .hero-card h1 {
+  font-size: clamp(2.2rem, 10vw, 3.05rem);
+  line-height: 1.15;
+  text-shadow: 0 0 22px rgba(214,168,91,.24);
+}
+.input,
+.option-card,
+.segmented button,
+.weapon-grid button,
+.profile-code-box {
+  border: 1px solid rgba(214,168,91,.58) !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.22)),
+    rgba(3,9,20,.90) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -10px 22px rgba(0,0,0,.24);
+}
+.segmented button,
+.weapon-grid button { color: #f4ead8; }
+.segmented button.selected,
+.weapon-grid button.selected,
+.option-card.selected {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,226,160,.20), transparent 58%),
+    linear-gradient(180deg, rgba(214,168,91,.24), rgba(4,12,24,.90)) !important;
+  border-color: rgba(255,226,160,.92) !important;
+}
+.option-letter {
+  border-radius: 999px;
+  background:
+    url("/ui/fantasy/button-ornate-frame.svg") center / 100% 100% no-repeat,
+    rgba(28,26,24,.88);
+}
+.progress-track {
+  border: 1px solid rgba(214,168,91,.52);
+  background: rgba(3,9,20,.96);
+}
+.progress-fill {
+  background: linear-gradient(90deg, #b9822f, #fff0bd);
+  box-shadow: 0 0 16px rgba(255,226,160,.42);
+}
+.primary,
+.secondary {
+  border: 0 !important;
+  background:
+    url("/ui/fantasy/button-ornate-frame.svg") center / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(255,255,255,.055), rgba(0,0,0,.22)),
+    rgba(7,16,31,.96);
+  color: #f4ead8;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -12px 24px rgba(0,0,0,.30),
+    0 12px 30px rgba(0,0,0,.30);
+}
+.primary {
+  background:
+    url("/ui/fantasy/button-ornate-frame.svg") center / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(255,226,160,.34), rgba(92,57,15,.38)),
+    rgba(27,16,4,.92);
+  color: #fff2bd;
+}
+.result-card { padding: 24px 22px; margin-bottom: 15px; border-radius: 20px; }
+.result-card-hero { min-height: 270px; text-align: center; }
+.result-hero h1 {
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0,0,0,.8), 0 0 20px rgba(214,168,91,.34);
+}
+.result-hero .subtitle { text-align: center; }
+.image-card { min-height: 435px; }
+.image-card::before {
+  background:
+    url("/ui/fantasy/card-ornate-frame.svg") center / 100% 100% no-repeat,
+    url("/ui/fantasy/magic-halo.svg") center 28% / 88% auto no-repeat;
+}
+.tag-list span,
+.keyword-list span {
+  border-radius: 12px;
+  border: 1px solid rgba(214,168,91,.76);
+  background:
+    url("/ui/fantasy/button-ornate-frame.svg") center / 100% 100% no-repeat,
+    rgba(5,13,26,.94);
+}
+.result-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+}
+.result-section h3::before {
+  content: "";
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  background: url("/ui/fantasy/icon-star.svg") center / contain no-repeat;
+}
+.appearance-section h3::before { background-image: url("/ui/fantasy/icon-mirror.svg"); }
+.memorable-section h3::before,
+.strength-section h3::before { background-image: url("/ui/fantasy/icon-sword.svg"); }
+.death-section h3::before,
+.weakness-section h3::before { background-image: url("/ui/fantasy/icon-shield.svg"); }
+.result-section h3::after {
+  content: "";
+  display: block;
+  width: 130px;
+  height: 12px;
+  margin-top: 0;
+  background: url("/ui/fantasy/title-divider-ornate.svg") center / contain no-repeat;
+  flex: 1 1 auto;
+  opacity: .95;
+}
+.analysis-section { min-height: 455px; }
+.radar-svg { filter: drop-shadow(0 0 18px rgba(214,168,91,.20)); }
+.radar-value-area { fill: rgba(214,168,91,.54); stroke: rgba(255,240,189,.98); }
+.result-actions { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.share-action {
+  background:
+    url("/ui/fantasy/button-ornate-frame.svg") center / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(110,65,150,.35), rgba(24,10,45,.40)),
+    rgba(24,12,45,.90);
+}
+.save-result-action {
+  background:
+    url("/ui/fantasy/button-ornate-frame.svg") center / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(30,125,130,.36), rgba(10,50,56,.38)),
+    rgba(5,38,46,.92);
+}
+.save-profile-action {
+  background:
+    url("/ui/fantasy/button-ornate-frame.svg") center / 100% 100% no-repeat,
+    linear-gradient(180deg, rgba(214,168,91,.30), rgba(72,42,12,.38)),
+    rgba(36,22,8,.92);
+}
+
+
+/* ---------- PNG Asset Fantasy Skin v4: generated image assets applied ---------- */
+body {
+  background:
+    linear-gradient(180deg, rgba(3,7,17,.2), rgba(3,7,17,.85)),
+    url("/ui/fantasy-png/page-bg.png") center top / cover fixed no-repeat,
+    #030711 !important;
+}
+
+body::before {
+  background: none !important;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 50% 12%, transparent 0%, rgba(0,0,0,.40) 78%) !important;
+  opacity: 1 !important;
+}
+
+.question-card > .eyebrow {
+  display: none !important;
+}
+
+.page {
+  width: min(100%, 460px);
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+/* Base panels: actual generated PNG frame overlay */
+.start-page .card,
+.test-page .card,
+.test-page .progress-card,
+.result-card {
+  position: relative;
+  border: 0 !important;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(8,18,34,.82), rgba(3,8,18,.92)),
+    rgba(3,8,18,.92) !important;
+  box-shadow:
+    0 20px 54px rgba(0,0,0,.52),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -20px 44px rgba(0,0,0,.28) !important;
+  overflow: hidden;
+}
+
+.start-page .hero-card,
+.result-card-hero {
+  position: relative;
+  border: 0 !important;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 78% 20%, rgba(25,85,155,.20), transparent 40%),
+    linear-gradient(180deg, rgba(8,18,34,.82), rgba(3,8,18,.95)),
+    rgba(3,8,18,.96) !important;
+  overflow: hidden;
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.58),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -28px 50px rgba(0,0,0,.30) !important;
+}
+
+.start-page .card::before,
+.test-page .card::before,
+.test-page .progress-card::before,
+.result-card::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  border: 0 !important;
+  border-radius: inherit;
+  background: url("/ui/fantasy-png/panel-frame.png") center / 100% 100% no-repeat !important;
+  opacity: .96;
+  z-index: 2;
+}
+
+.start-page .hero-card::before,
+.result-card-hero::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  pointer-events: none;
+  border: 0 !important;
+  border-radius: inherit;
+  background: url("/ui/fantasy-png/hero-frame.png") center / 100% 100% no-repeat !important;
+  opacity: .98;
+  z-index: 2;
+}
+
+.start-page .card > *,
+.start-page .hero-card > *,
+.test-page .card > *,
+.test-page .progress-card > *,
+.result-card > * {
+  position: relative;
+  z-index: 3;
+}
+
+.start-page .hero-card h1,
+.result-hero h1 {
+  color: #fff0bd !important;
+  text-shadow:
+    0 1px 0 rgba(0,0,0,.9),
+    0 0 20px rgba(214,168,91,.38),
+    0 0 4px rgba(255,240,189,.35);
+}
+
+/* Portrait frame */
+.image-card {
+  min-height: 430px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255,240,189,.12), transparent 42%),
+    rgba(3,8,18,.92) !important;
+}
+
+.image-card::before {
+  inset: -12px !important;
+  background:
+    url("/ui/fantasy-png/portrait-frame.png") center / 100% 100% no-repeat !important;
+  opacity: .98;
+}
+
+.empty-image-box {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255,240,189,.10), transparent 38%),
+    transparent !important;
+}
+
+/* Inputs/options/buttons */
+.input,
+.option-card,
+.segmented button,
+.weapon-grid button,
+.profile-code-box {
+  border: 1px solid rgba(214,168,91,.55) !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), rgba(0,0,0,.22)),
+    rgba(5,13,26,.88) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -10px 22px rgba(0,0,0,.24) !important;
+  color: #f4ead8;
+}
+
+.primary,
+.secondary {
+  border: 0 !important;
+  border-radius: 16px !important;
+  color: #fff0bd !important;
+  background:
+    url("/ui/fantasy-png/button-blue.png") center / 100% 100% no-repeat,
+    rgba(5,13,26,.92) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.28) !important;
+}
+
+.primary,
+.save-profile-action {
+  background:
+    url("/ui/fantasy-png/button-gold.png") center / 100% 100% no-repeat,
+    rgba(61,34,8,.92) !important;
+}
+
+.share-action,
+.save-result-action,
+.code-action {
+  background:
+    url("/ui/fantasy-png/button-blue.png") center / 100% 100% no-repeat,
+    rgba(5,13,26,.92) !important;
+}
+
+.primary:disabled,
+.secondary:disabled {
+  background:
+    url("/ui/fantasy-png/button-dark.png") center / 100% 100% no-repeat,
+    rgba(20,23,30,.92) !important;
+  color: rgba(244,234,216,.45) !important;
+}
+
+/* Tags and keywords */
+.tag-list span,
+.keyword-list span {
+  border: 0 !important;
+  border-radius: 14px;
+  background:
+    url("/ui/fantasy-png/button-blue.png") center / 100% 100% no-repeat,
+    rgba(5,13,26,.92) !important;
+  color: #fff0bd !important;
+  padding: 10px 16px;
+}
+
+/* Section heading icon and divider using generated image assets */
+.result-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+}
+
+.result-section h3::before {
+  content: "";
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  background: url("/ui/fantasy-png/icon-interpretation.png") center / contain no-repeat !important;
+  filter: drop-shadow(0 0 8px rgba(214,168,91,.22));
+}
+
+.appearance-section h3::before { background-image: url("/ui/fantasy-png/icon-appearance.png") !important; }
+.memorable-section h3::before { background-image: url("/ui/fantasy-png/icon-situation.png") !important; }
+.death-section h3::before { background-image: url("/ui/fantasy-png/icon-death.png") !important; }
+.strength-section h3::before { background-image: url("/ui/fantasy-png/icon-strength.png") !important; }
+.weakness-section h3::before { background-image: url("/ui/fantasy-png/icon-weakness.png") !important; }
+.keyword-section h3::before { background-image: url("/ui/fantasy-png/icon-keyword.png") !important; }
+
+.result-section h3::after {
+  content: "";
+  display: block;
+  height: 16px;
+  min-width: 110px;
+  flex: 1 1 auto;
+  background: url("/ui/fantasy-png/divider.png") center / contain no-repeat !important;
+  margin-top: 0;
+}
+
+.radar-value-area {
+  fill: rgba(214,168,91,.55) !important;
+  stroke: rgba(255,240,189,.98) !important;
+}
+
+.radar-svg {
+  filter: drop-shadow(0 0 16px rgba(214,168,91,.18));
+}
+
+.result-actions {
+  grid-template-columns: 1fr !important;
+  gap: 11px;
+}
