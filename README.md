@@ -1,3 +1,25 @@
+# Asset Skin v5 Fixed
+
+v4의 글자/장식 겹침 문제를 수정한 안정화 버전입니다.
+
+핵심 수정:
+1. 통짜 PNG 프레임을 카드/버튼 배경으로 쓰지 않음
+2. 배경 PNG는 유지
+3. 아이콘 PNG는 유지
+4. 카드와 버튼은 CSS 기반으로 안정화
+5. 카드 내부 padding과 장식 레이어를 분리
+6. 성향 분석 그래프 하단 여백 확보
+7. 문항 카테고리 배지 제거 유지
+
+자산 경로:
+- `/public/ui/fantasy-png/`
+
+핵심 파일:
+- `src/app/globals.css`
+- `src/components/TestApp.tsx`
+
+---
+
 # PNG Asset Fantasy Skin v4
 
 이미지 생성으로 만든 실제 PNG 자산을 프로젝트에 적용한 버전입니다.
