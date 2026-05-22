@@ -1,3 +1,24 @@
+# V8 Transparent Skin Surface
+
+수정 목표:
+- 텍스트 영역이 스킨을 가리는 문제 수정
+- 카드 자체를 불투명 박스로 만들지 않음
+- 프레임은 9-slice 레이어
+- 패널 질감은 surface 레이어
+- 텍스트 가독성은 얇은 오버레이만 사용
+
+핵심 변경:
+1. `background: rgba(... .96/.98)` 계열 제거
+2. `panel-surface.png`, `hero-surface.png` 추가
+3. 카드 `::after`에 스킨 질감 레이어 적용
+4. 카드 `::before`에 프레임 레이어 적용
+5. 버튼/선택지/입력칸도 반투명으로 수정
+
+자산 경로:
+- `/public/ui/fantasy-v8/`
+
+---
+
 # V7 Visible Frame 9-slice Skin
 
 v6에서 비주얼이 단순해진 직접 원인:
